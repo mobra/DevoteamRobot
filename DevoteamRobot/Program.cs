@@ -6,20 +6,41 @@ class RobotController
     {
         try
         {
-       
-            //Parse input text
-            string [] roomSize = Console.ReadLine ().Trim ().Split (' ');
-            int width = int.Parse (roomSize [0]);
-            int depth = int.Parse (roomSize [1]);
 
+            // Parse input room size
+            string [] roomSize = Console.ReadLine ().Trim ().Split (' ');
+
+            // Checks if the format is correct and, if it is, assigns the values
+            if (roomSize.Length != 2 || !int.TryParse (roomSize [0], out int width) || !int.TryParse (roomSize [1], out int depth))
+            {
+                throw new FormatException ("Room dimensions format is not correct. Please enter two integers separated by one space.");
+            }
+
+            // Parse input robot starting position and direction
             string [] initialPosition = Console.ReadLine ().Trim ().Split (' ');
-            int startX = int.Parse (initialPosition [0]);
-            int startY = int.Parse (initialPosition [1]);
+
+            if (initialPosition.Length != 3 || !int.TryParse (initialPosition [0], out int startX) || !int.TryParse (initialPosition [1], out int startY) || initialPosition [2].Length != 1)
+            {
+                throw new FormatException ("Initial robot position format is not correct. Please enter two integers and a single character separated by one space each.");
+            }
+
+            if (startX < 0 || startX >= width || startY < 0 || startY >= depth)
+            {
+                throw new FormatException ("Initial robot position is not inside the room's bounds.");
+            }
 
             char startDirection = initialPosition [2] [0];
+
+            if (startDirection != 'N' && startDirection != 'E' && startDirection != 'S' && startDirection != 'W')
+            {
+                throw new FormatException ("Initial direction format is not correct. Please enter one of 'N', 'E', 'S', 'W'.");
+            }
+
+            // Parse input commands
             string commands = Console.ReadLine ().Trim ();
 
             Robot robot = new Robot (width, depth, startX, startY, startDirection);
+
             robot.ExecuteCommands (commands);
             robot.OutputReport ();
 
