@@ -74,6 +74,12 @@ class RobotController
         {
             Console.WriteLine (ex.Message);
         }
+        finally
+        {
+            // Wait for a key press before closing
+            Console.WriteLine ("Press any key to exit.");
+            Console.ReadKey ();
+        }
     }
 }
 public class Robot
