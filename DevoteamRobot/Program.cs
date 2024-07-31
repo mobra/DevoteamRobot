@@ -22,4 +22,64 @@ class RobotController
             m_yPos = startY;
             m_direction = startDirection;
         }
+
+    public void ExecuteCommands (string commands)
+    {
+        foreach (char command in commands)
+        {
+            switch (command)
+            {
+                case 'L':
+                    TurnLeft ();
+                    break;
+                case 'R':
+                    TurnRight ();
+                    break;
+                case 'F':
+                    //WalkForward ();
+                    break;               
+            }
+        }
     }
+
+    private void TurnLeft ()
+    {
+        switch (m_direction)
+        {
+            case 'N':
+                m_direction = 'W';
+                break;
+            case 'W':
+                m_direction = 'S';
+                break;
+            case 'S':
+                m_direction = 'E';
+                break;
+            case 'E':
+                m_direction = 'N';
+                break;
+        }
+    }
+
+    private void TurnRight ()
+    {
+        switch (m_direction)
+        {
+            case 'N':
+                m_direction = 'E';
+                break;
+            case 'E':
+                m_direction = 'S';
+                break;
+            case 'S':
+                m_direction = 'W';
+                break;
+            case 'W':
+                m_direction = 'N';
+                break;
+        }
+    }
+
+
+
+}
