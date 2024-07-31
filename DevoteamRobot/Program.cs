@@ -31,6 +31,7 @@ class RobotController
                 throw new FormatException ("Initial robot position is not inside the room's bounds.");
             }
 
+            // Converts all chars to UpperCase
             char startDirection = char.ToUpper (initialPosition [2] [0]);
 
             if (startDirection != 'N' && startDirection != 'E' && startDirection != 'S' && startDirection != 'W')
@@ -177,10 +178,8 @@ public class Robot
 
     }
 
-
-
     public void OutputReport ()
     {
-        Console.WriteLine ("Report: " + m_xPos + " " + m_yPos + " " + m_direction);
+        Console.WriteLine ($"Report: {m_xPos} {m_yPos} {m_direction}");
     }
 }
