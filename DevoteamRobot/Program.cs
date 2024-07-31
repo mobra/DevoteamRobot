@@ -8,6 +8,7 @@ class RobotController
         {
 
             // Parse input room size
+            Console.WriteLine ("Enter the room dimensions (width height)");
             string [] roomSize = Console.ReadLine ().Trim ().Split (' ');
 
             // Checks if the format is correct and, if it is, assigns the values
@@ -17,6 +18,7 @@ class RobotController
             }
 
             // Parse input robot starting position and direction
+            Console.WriteLine ("Enter the initial position and direction of the robot (x y D)");
             string [] initialPosition = Console.ReadLine ().Trim ().Split (' ');
 
             if (initialPosition.Length != 3 || !int.TryParse (initialPosition [0], out int startX) || !int.TryParse (initialPosition [1], out int startY) || initialPosition [2].Length != 1)
@@ -37,6 +39,7 @@ class RobotController
             }
 
             // Parse input commands
+            Console.WriteLine ("Enter the commands");
             string commands = Console.ReadLine ().Trim ();
 
             foreach (char command in commands)
