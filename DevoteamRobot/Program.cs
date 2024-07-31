@@ -4,25 +4,30 @@ class RobotController
 {
     static void Main (string[] args)
     {
-        //Parse input text
-        string [] roomSize = Console.ReadLine ().Trim ().Split (' ');
-        int width = int.Parse (roomSize [0]);
-        int depth = int.Parse (roomSize [1]);
+        try
+        {
+       
+            //Parse input text
+            string [] roomSize = Console.ReadLine ().Trim ().Split (' ');
+            int width = int.Parse (roomSize [0]);
+            int depth = int.Parse (roomSize [1]);
 
-        string [] initialPosition = Console.ReadLine ().Trim ().Split (' ');
-        int startX = int.Parse (initialPosition [0]);
-        int startY = int.Parse (initialPosition [1]);
+            string [] initialPosition = Console.ReadLine ().Trim ().Split (' ');
+            int startX = int.Parse (initialPosition [0]);
+            int startY = int.Parse (initialPosition [1]);
 
-        char startDirection = initialPosition [2] [0];
-        string commands = Console.ReadLine ().Trim ();
+            char startDirection = initialPosition [2] [0];
+            string commands = Console.ReadLine ().Trim ();
 
-        Robot robot = new Robot (width, depth, startX, startY, startDirection);
-        robot.ExecuteCommands (commands);
-        robot.OutputReport ();
+            Robot robot = new Robot (width, depth, startX, startY, startDirection);
+            robot.ExecuteCommands (commands);
+            robot.OutputReport ();
 
-
-
-
+        }
+        catch (Exception ex) 
+        {
+            Console.WriteLine (ex.Message);
+        }
     }
 }
 public class Robot
@@ -118,7 +123,16 @@ public class Robot
                 m_xPos--;
                 break;
         }
+
+        // Check if the robot got off the room
+        if (m_xPos < 0 || m_xPos >= m_roomWidth || m_yPos < 0 || m_yPos >= m_roomDepth)
+        {
+            throw new InvalidOperationException ("The robot tried to walk out of the room!");
+        }
+
     }
+
+
 
     public void OutputReport ()
     {
