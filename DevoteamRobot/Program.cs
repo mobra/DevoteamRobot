@@ -4,24 +4,24 @@ class RobotController
 {
 
 }
-    public class Robot
-    {
-        private int m_roomWidth = default;
-        private int m_roomDepth = default;
-        private int m_xPos = default;
-        private int m_yPos = default;
-        
-        private char m_direction = default;
-        
+public class Robot
+{
+    private int m_roomWidth = default;
+    private int m_roomDepth = default;
+    private int m_xPos = default;
+    private int m_yPos = default;
 
-        public Robot (int width, int depth, int startX, int startY, char startDirection)
-        {
-            m_roomWidth = width;
-            m_roomDepth = depth;
-            m_xPos = startX;
-            m_yPos = startY;
-            m_direction = startDirection;
-        }
+    private char m_direction = default;
+
+
+    public Robot (int width, int depth, int startX, int startY, char startDirection)
+    {
+        m_roomWidth = width;
+        m_roomDepth = depth;
+        m_xPos = startX;
+        m_yPos = startY;
+        m_direction = startDirection;
+    }
 
     public void ExecuteCommands (string commands)
     {
@@ -36,8 +36,8 @@ class RobotController
                     TurnRight ();
                     break;
                 case 'F':
-                    //WalkForward ();
-                    break;               
+                    WalkForward ();
+                    break;
             }
         }
     }
@@ -80,6 +80,27 @@ class RobotController
         }
     }
 
+    private void WalkForward ()
+    {
+        switch (m_direction)
+        {
+            case 'N':
+                m_yPos++;
+                break;
+            case 'E':
+                m_xPos++;
+                break;
+            case 'S':
+                m_yPos--;
+                break;
+            case 'W':
+                m_xPos--;
+                break;
+        }
+    }
 
-
+    public void OutputReport ()
+    {
+        Console.WriteLine ("Report: " + m_xPos + " " + m_yPos + " " + m_direction);
+    }
 }
