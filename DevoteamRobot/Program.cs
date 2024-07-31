@@ -31,16 +31,24 @@ class RobotController
                 throw new FormatException ("Initial robot position is not inside the room's bounds.");
             }
 
-            char startDirection = initialPosition [2] [0];
+            char startDirection = char.ToUpper (initialPosition [2] [0]);
 
             if (startDirection != 'N' && startDirection != 'E' && startDirection != 'S' && startDirection != 'W')
             {
                 throw new FormatException ("Initial direction format is not correct. Please enter one of 'N', 'E', 'S', 'W'.");
             }
 
+            // Inform the user if the input was converted to uppercase
+
+            if (initialPosition [2] [0] != startDirection)
+            {
+                Console.WriteLine ("The initial direction has to be uppercase. This time we converted it for you!");
+            }
+
             // Parse input commands
             Console.WriteLine ("Enter the commands");
-            string commands = Console.ReadLine ().Trim ();
+            string commandsRaw = Console.ReadLine ().Trim ();
+            string commands = commandsRaw.ToUpper ();
 
             foreach (char command in commands)
             {
@@ -48,6 +56,11 @@ class RobotController
                 {
                     throw new FormatException ("Commands' format is not correct. Please enter a string containing only 'L', 'R', 'F'.");
                 }
+            }
+
+            if (commands != commandsRaw)
+            {
+                Console.WriteLine ("All the commands should be uppercase. We converted them for you!");
             }
 
             Robot robot = new Robot (width, depth, startX, startY, startDirection);
