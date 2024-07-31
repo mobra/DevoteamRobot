@@ -39,6 +39,14 @@ class RobotController
             // Parse input commands
             string commands = Console.ReadLine ().Trim ();
 
+            foreach (char command in commands)
+            {
+                if (command != 'L' && command != 'R' && command != 'F')
+                {
+                    throw new FormatException ("Commands' format is not correct. Please enter a string containing only 'L', 'R', 'F'.");
+                }
+            }
+
             Robot robot = new Robot (width, depth, startX, startY, startDirection);
 
             robot.ExecuteCommands (commands);
