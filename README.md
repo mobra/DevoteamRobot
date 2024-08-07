@@ -2,6 +2,7 @@
 
 This repository contains code for a C# programming assignment.
 
+You can download the compiled files for Windows machines [here](https://github.com/mobra/DevoteamRobot/releases/tag/1.0.0).
 
 To run the app, simply double-click on the
 #### `DevoteamRobot.exe` file
